@@ -20,7 +20,7 @@ class wechatCallbackapiTest
 {
     public function valid(){
         $echostr = $_GET["echostr"];
-        if($this->checkSingature()){
+        if($this->checkSignature()){
             echo $echostr;
             exit;
         }
