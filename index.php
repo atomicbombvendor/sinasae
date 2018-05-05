@@ -15,7 +15,7 @@ traceHttp();
 //$_GET["timestamp"] = "1525513098";
 
 $wechatObj = new wechatCallbackapiTest();
-echo "hello";
+
 if(isset($_GET['echostr'])){
     $wechatObj->valid();
 }else{
