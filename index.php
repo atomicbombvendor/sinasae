@@ -9,6 +9,12 @@
 header('Content-type:text');
 define("TOKEN", "weixin");
 traceHttp();
+$_GET["echostr"] = "1841654301281222075";
+$_GET["signature"] = "01261ba52266cca19ddf54bc04dc6d02c399a89a";
+$_GET["nonce"] = "2593464896";
+$_GET["timestamp"] = "1525512603";
+
+http://xiaobaili.applinzi.com/
 $wechatObj = new wechatCallbackapiTest();
 echo "hello";
 if(isset($_GET['echostr'])){
@@ -23,7 +29,9 @@ class wechatCallbackapiTest
         $echostr = $_GET["echostr"];
         if($this->checkSignature()){
             echo $echostr;
-            exit;
+            return $echostr;
+        }else{
+            return "";
         }
     }
 
@@ -86,7 +94,7 @@ function traceHttp(){
     }else{
         $max_size = 100000;
         $log_filename = "log.dat";
-        if(file_exists($log_filename) and abs(filesize($log_filename)) > $max_size){
+        if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){
             unlink($log_filename);
         }
         file_put_contents($log_filename, $content, FILE_APPEND);
