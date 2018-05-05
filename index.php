@@ -85,7 +85,7 @@ function traceHttp(){
         sae_set_display_errors(true);
     }else{
         $max_size = 100000;
-        $log_filename = "log.xml";
+        $log_filename = "log.dat";
         if(file_exists($log_filename) and abs(filesize($log_filename)) > $max_size){
             unlink($log_filename);
         }
