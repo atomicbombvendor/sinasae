@@ -9,12 +9,11 @@
 header('Content-type:text');
 define("TOKEN", "weixin");
 traceHttp();
-$_GET["echostr"] = "1841654301281222075";
-$_GET["signature"] = "01261ba52266cca19ddf54bc04dc6d02c399a89a";
-$_GET["nonce"] = "2593464896";
-$_GET["timestamp"] = "1525512603";
+//$_GET["echostr"] = "6220231386950663050";
+//$_GET["signature"] = "7b2df6e3d04ad7c631646f79692c051b28b03640";
+//$_GET["nonce"] = "1708873787";
+//$_GET["timestamp"] = "1525513098";
 
-http://xiaobaili.applinzi.com/
 $wechatObj = new wechatCallbackapiTest();
 echo "hello";
 if(isset($_GET['echostr'])){
