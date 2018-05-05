@@ -5,11 +5,11 @@
  * Date: 5/5/2018
  * Time: 16:07
  */
-echo "hello";
 
 header('Content-type:text');
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
+echo "hello";
 if(isset($_GET['echostr'])){
     $wechatObj->valid();
 }else{
