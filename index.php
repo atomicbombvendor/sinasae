@@ -8,14 +8,8 @@
 
 header('Content-type:text');
 define("TOKEN", "weixin");
-traceHttp();
-//$_GET["echostr"] = "6220231386950663050";
-//$_GET["signature"] = "7b2df6e3d04ad7c631646f79692c051b28b03640";
-//$_GET["nonce"] = "1708873787";
-//$_GET["timestamp"] = "1525513098";
-
+//traceHttp();
 $wechatObj = new wechatCallbackapiTest();
-
 if(isset($_GET['echostr'])){
     $wechatObj->valid();
 }else{
