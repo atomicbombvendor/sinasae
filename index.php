@@ -9,16 +9,15 @@
 header('Content-type:text');
 define("TOKEN", "weixin");
 
-//$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
-//    <ToUserName><![CDATA[lyonxving]]></ToUserName>
-//    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
-//    <CreateTime>1525588896</CreateTime>
-//    <MsgType><![CDATA[text]]></MsgType>
-//    <Content><![CDATA[SBB]]></Content>
-//    <MsgId>1234567890abcdef</MsgId>
-//</xml>";
+$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
+    <ToUserName><![CDATA[gh_6677c3eda143]]></ToUserName>
+    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
+    <CreateTime>1525600524</CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content><![CDATA[你好啊]]></Content>
+    <MsgId>1234567890abcdef</MsgId>
+</xml>";
 
-//traceHttp();
 
 $wechatObj = new wechatCallbackapiTest();
 if(isset($_GET['echostr'])){
@@ -152,7 +151,11 @@ class wechatCallbackapiTest
                 "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3",
                 "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
         } else {
-            $content = date("Y-m-d H:i:s" . time()) . "\nOpenId:" . $object->FromUserName . "\n";
+            if($keyword == "?" || $keyword == "？" || $keyword == "时间" || $keyword == "time"){//回复时间
+                $content = date("Y-m-d H:i:s" . time()) . "\nOpenId:" . $object->FromUserName . "\n";
+            }else { //回复接收的内容
+                $content = $keyword;
+            }
         }
 
         if (is_array($content)) {
@@ -160,9 +163,9 @@ class wechatCallbackapiTest
                 $result = $this->transmitNews($object, $content);
             } else if (isset($content['MusicUrl'])) {
                 $result = $this->transmitMusic($object, $content);
-            } else {
-                $result = $this->transmitText($object, $content);
             }
+        }else {
+            $result = $this->transmitText($object, $content);
         }
         return $result;
     }
