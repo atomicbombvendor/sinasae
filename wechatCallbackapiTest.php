@@ -99,9 +99,7 @@ class wechatCallbackapiTest
         return $result;
     }
 
-    private function receiveText($object)
-    {
-
+    private function receiveText($object){
         $keyword = trim($object->Content);
 
         if (strstr($keyword, "文本")) { // strstr 查找 文本 第一次出现的位置，并返回字符串的剩余部分
@@ -110,26 +108,26 @@ class wechatCallbackapiTest
             $content = "微笑：/::) \n 乒乓：/:oo \n 中国：" . $this->bytes_to_emoji(0x1F1E8) . $this->bytes_to_emoji(0x1F1F3) . "\n仙人掌：" . $this->bytes_to_emoji(0x1F335);
         } else if (strstr($keyword, "单图文")) {
             $content = array();
-            $content[] = array("Title" => "单图文标题",
-                "Description" => "单图文内容",
+            $content[] = array("Title" => "百度",
+                "Description" => "百度一下",
                 "PicUrl" => "http://discuz.comli.com/weixin/weather/icon/cartoon.jpg",
-                "Url" => "http://m.cnblogs.com/?u=txw1958");
+                "Url" => "www.baidu.com");
         } else if (strstr($keyword, "图文") || strstr($keyword, "多图文")) {
             $content = array(); //数组下面包含了别名数组，也就是 二维数组
-            $content[] = array("Title" => "多图文1标题",
-                "Description" => "", "PicUrl" => "http://discuz.comli.com/weixin/weather/icon/cartoon.jpg",
-                "Url" => "http://m.cnblogs.com/?u=txw1958");
-            $content[] = array("Title" => "多图文2标题",
-                "Description" => "", "PicUrl" => "http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg",
-                "Url" => "http://m.cnblogs.com/?u=txw1958");
-            $content[] = array("Title" => "多图文3标题",
-                "Description" => "", "PicUrl" => "http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg",
-                "Url" => "http://m.cnblogs.com/?u=txw1958");
+            $content[] = array("Title" => "百度",
+                "Description" => "百度一下", "PicUrl" => "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525612273111&di=3f361f8be91aece6d780e86c43a1fdb4&imgtype=0&src=http%3A%2F%2Fwww.qiuyongsheng.com%2Fstatic%2Findex%2Fbaidu.jpg",
+                "Url" => "www.baidu.com");
+            $content[] = array("Title" => "谷歌",
+                "Description" => "Google", "PicUrl" => "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525612292301&di=3d8070d14b8050e543165db2e44cdea0&imgtype=0&src=http%3A%2F%2Fy0.ifengimg.com%2Fa%2F2015_36%2F766fd29982c0b0a.jpg",
+                "Url" => "www.google.com");
+            $content[] = array("Title" => "BING",
+                "Description" => "必应搜索", "PicUrl" => "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1183383073,3416433625&fm=27&gp=0.jpg",
+                "Url" => "www.bing.com");
         } else if (strstr($keyword, "音乐")) {
             $content = array("Title"=>"最炫民族风",
                 "Description"=>"歌手：凤凰传奇",
-                "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3",
-                "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
+                "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
+                "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
         } else {
             if($keyword == "时间" || $keyword == "time"){//回复时间
                 $content = date('y-m-d h:i:s',time()) . "\nOpenId:" . $object->FromUserName . "\n";
