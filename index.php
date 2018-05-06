@@ -298,10 +298,10 @@ class wechatCallbackapiTest
     }
 
     private function logger($log_content){
-        $content = date('Y-m-d H:i:s') . "\nREMOTE_ADDR:" . $_SERVER["REMOTE_ADDR"] . "\nQUERY_STRING:" . $_SERVER["QUERY_STRING"] . "\n\n";
+        $content = date('Y-m-d H:i:s')." ".$log_content."\r\n";
         if (isset($_SERVER['HTTP_APPNAME'])) {
-            sae_set_display_error(false);
-            sae_debug($log_content);
+            sae_set_display_errors(false);
+            sae_debug(trim($content));
             sae_set_display_errors(true);
         } else if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {//LOCAL
             $max_size = 100000;
