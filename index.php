@@ -6,7 +6,7 @@
  * Time: 16:07
  */
 
-header('Content-type:text');
+//header('Content-type:text');
 define("TOKEN", "weixin");
 //traceHttp();
 $wechatObj = new wechatCallbackapiTest();
@@ -22,9 +22,7 @@ class wechatCallbackapiTest
         $echostr = $_GET["echostr"];
         if($this->checkSignature()){
             echo $echostr;
-            return $echostr;
-        }else{
-            return "";
+            exit;
         }
     }
 
@@ -55,15 +53,20 @@ class wechatCallbackapiTest
             $keyword = trim($postObj->Content);
             $time = time();
             $textTpl = "<xml>
-                         <ToUserName><![CDATA[%s]]></ToUserName>
-                         <FromUserName><![CDATA[%s]]></FromUserName>
-                         <CreateTime><![CDATA[%s]]></CreateTime>
-                         <MsgType><![CDATA[%s]]></MsgType>
-                         <Content><![CDATA[%s]]></Content>
-                         <FuncFlag>0</FuncFlag>
-                         </xml>";
+                        <ToUserName>< ![CDATA[%s] ]></ToUserName>
+                        <FromUserName>< ![CDATA[%s] ]></FromUserName>
+                        <CreateTime>%s</CreateTime>
+                        <MsgType>< ![CDATA[%s] ]></MsgType>
+                        <Content>< ![CDATA[%s] ]></Content>
+                        <FuncFlag>0</FuncFlag>
+                        </xml>";
 
-            if($keyword == "?" || $keyword == "?"){
+            if($keyword == "?" || $keyword == "？"){
+                $msgType = "text";
+                $content = date("Y-m-d H:i:s", time());
+                $result = sprintf($textTpl, $fromUserName, $toUserName, $time, $msgType, $content);
+                echo $result;
+            }else if($keyword == "时间" || $keyword == "time") {
                 $msgType = "text";
                 $content = date("Y-m-d H:i:s", time());
                 $result = sprintf($textTpl, $fromUserName, $toUserName, $time, $msgType, $content);
