@@ -10,15 +10,16 @@ header('Content-type:text');
 define("TOKEN", "weixin");
 
 //$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
-//    <ToUserName><![CDATA[gh_204936aea56d]]></ToUserName>
+//    <ToUserName><![CDATA[lyonxving]]></ToUserName>
 //    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
-//    <CreateTime>1525587843</CreateTime>
+//    <CreateTime>1525588896</CreateTime>
 //    <MsgType><![CDATA[text]]></MsgType>
-//    <Content><![CDATA[?]]></Content>
+//    <Content><![CDATA[SBB]]></Content>
 //    <MsgId>1234567890abcdef</MsgId>
 //</xml>";
 
 //traceHttp();
+
 $wechatObj = new wechatCallbackapiTest();
 if(isset($_GET['echostr'])){
     $wechatObj->valid();
@@ -62,13 +63,9 @@ class wechatCallbackapiTest
             $toUserName = $postObj->ToUserName;
             $keyword = trim($postObj->Content);
             $time = time();
-            $textTpl = "<xml>
-                        <ToUserName>< ![CDATA[%s] ]></ToUserName>
-                        <FromUserName>< ![CDATA[%s] ]></FromUserName>
-                        <CreateTime>%s</CreateTime>
-                        <MsgType>< ![CDATA[%s] ]></MsgType>
-                        <Content>< ![CDATA[%s] ]></Content>
-                        </xml>";
+            $textTpl = "<xml><ToUserName>< ![CDATA[%s] ]></ToUserName> <FromUserName>< ![CDATA[%s] ]></FromUserName> "
+                ."<CreateTime>%s</CreateTime> <MsgType>< ![CDATA[%s] ]></MsgType> "
+                ."<Content>< ![CDATA[%s] ]></Content></xml>";
 
             if($keyword == "?" || $keyword == "？"){
                 $msgType = "text";
@@ -106,7 +103,4 @@ function traceHttp(){
         file_put_contents($log_filename, $content, FILE_APPEND);
     }
 }
-
-
-
 ?>
