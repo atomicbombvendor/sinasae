@@ -15,7 +15,7 @@ $GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
     <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
     <CreateTime>1525600524</CreateTime>
     <MsgType><![CDATA[text]]></MsgType>
-    <Content><![CDATA[时间]]></Content>
+    <Content><![CDATA[图文]]></Content>
     <MsgId>1234567890abcdef</MsgId>
 </xml>";
 

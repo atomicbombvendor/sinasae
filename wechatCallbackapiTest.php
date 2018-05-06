@@ -115,13 +115,13 @@ class wechatCallbackapiTest
         } else if (strstr($keyword, "图文") || strstr($keyword, "多图文")) {
             $content = array(); //数组下面包含了别名数组，也就是 二维数组
             $content[] = array("Title" => "百度",
-                "Description" => "百度一下", "PicUrl" => "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525612273111&di=3f361f8be91aece6d780e86c43a1fdb4&imgtype=0&src=http%3A%2F%2Fwww.qiuyongsheng.com%2Fstatic%2Findex%2Fbaidu.jpg",
+                "Description" => "百度一下", "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
                 "Url" => "www.baidu.com");
             $content[] = array("Title" => "谷歌",
-                "Description" => "Google", "PicUrl" => "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525612292301&di=3d8070d14b8050e543165db2e44cdea0&imgtype=0&src=http%3A%2F%2Fy0.ifengimg.com%2Fa%2F2015_36%2F766fd29982c0b0a.jpg",
+                "Description" => "Google", "PicUrl" => "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
                 "Url" => "www.google.com");
             $content[] = array("Title" => "BING",
-                "Description" => "必应搜索", "PicUrl" => "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1183383073,3416433625&fm=27&gp=0.jpg",
+                "Description" => "必应搜索", "PicUrl" => "https://img.25pp.com/uploadfile/app/icon/20161205/1480897804657521.jpg",
                 "Url" => "www.bing.com");
         } else if (strstr($keyword, "音乐")) {
             $content = array("Title"=>"最炫民族风",
