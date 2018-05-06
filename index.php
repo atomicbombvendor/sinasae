@@ -9,15 +9,14 @@
 header('Content-type:text');
 define("TOKEN", "weixin");
 
-$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
-    <ToUserName><![CDATA[gh_6677c3eda143]]></ToUserName>
-    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
-    <CreateTime>1525600524</CreateTime>
-    <MsgType><![CDATA[text]]></MsgType>
-    <Content><![CDATA[你好啊]]></Content>
-    <MsgId>1234567890abcdef</MsgId>
-</xml>";
-
+//$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
+//    <ToUserName><![CDATA[gh_6677c3eda143]]></ToUserName>
+//    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
+//    <CreateTime>1525600524</CreateTime>
+//    <MsgType><![CDATA[text]]></MsgType>
+//    <Content><![CDATA[?]]></Content>
+//    <MsgId>1234567890abcdef</MsgId>
+//</xml>";
 
 $wechatObj = new wechatCallbackapiTest();
 if(isset($_GET['echostr'])){
@@ -151,9 +150,11 @@ class wechatCallbackapiTest
                 "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3",
                 "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
         } else {
-            if($keyword == "?" || $keyword == "？" || $keyword == "时间" || $keyword == "time"){//回复时间
+            if($keyword == "时间" || $keyword == "time"){//回复时间
                 $content = date("Y-m-d H:i:s" . time()) . "\nOpenId:" . $object->FromUserName . "\n";
-            }else { //回复接收的内容
+            }else if($keyword == "?" || $keyword == "？" ){
+                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 time 文本 表情 单图文 多图文 音乐 \n 请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置";
+            } else { //回复接收的内容
                 $content = $keyword;
             }
         }
