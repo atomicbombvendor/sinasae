@@ -124,8 +124,8 @@ class wechatCallbackapiTest
                 "Description" => "必应搜索", "PicUrl" => "https://img.25pp.com/uploadfile/app/icon/20161205/1480897804657521.jpg",
                 "Url" => "www.bing.com");
         } else if (strstr($keyword, "音乐")) {
-            $content = array("Title"=>"最炫民族风",
-                "Description"=>"歌手：凤凰传奇",
+            $content = array("Title"=>"我第一个喜欢的女孩",
+                "Description"=>"歌手：凯瑟喵",
                 "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
                 "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
         } else {
