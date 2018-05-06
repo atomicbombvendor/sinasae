@@ -6,8 +6,18 @@
  * Time: 16:07
  */
 
-//header('Content-type:text');
+header('Content-type:text');
 define("TOKEN", "weixin");
+
+//$GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
+//    <ToUserName><![CDATA[gh_204936aea56d]]></ToUserName>
+//    <FromUserName><![CDATA[ojpX_jig-gyi3_Q9fHXQ4rdHniQs]]></FromUserName>
+//    <CreateTime>1525587843</CreateTime>
+//    <MsgType><![CDATA[text]]></MsgType>
+//    <Content><![CDATA[?]]></Content>
+//    <MsgId>1234567890abcdef</MsgId>
+//</xml>";
+
 //traceHttp();
 $wechatObj = new wechatCallbackapiTest();
 if(isset($_GET['echostr'])){
@@ -58,7 +68,6 @@ class wechatCallbackapiTest
                         <CreateTime>%s</CreateTime>
                         <MsgType>< ![CDATA[%s] ]></MsgType>
                         <Content>< ![CDATA[%s] ]></Content>
-                        <FuncFlag>0</FuncFlag>
                         </xml>";
 
             if($keyword == "?" || $keyword == "？"){
@@ -72,8 +81,9 @@ class wechatCallbackapiTest
                 $result = sprintf($textTpl, $fromUserName, $toUserName, $time, $msgType, $content);
                 echo $result;
             }else{
-                echo "";
-                exit;
+                $msgType = "text";
+                $result = sprintf($textTpl, $fromUserName, $toUserName, $time, $msgType, $keyword);
+                echo $result;
             }
         }
     }
