@@ -110,7 +110,7 @@ class wechatCallbackapiTest
             $content = array();
             $content[] = array("Title" => "百度",
                 "Description" => "百度一下",
-                "PicUrl" => "http://discuz.comli.com/weixin/weather/icon/cartoon.jpg",
+                "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
                 "Url" => "www.baidu.com");
         } else if (strstr($keyword, "图文") || strstr($keyword, "多图文")) {
             $content = array(); //数组下面包含了别名数组，也就是 二维数组
@@ -282,7 +282,7 @@ class wechatCallbackapiTest
 
     private function logger($log_content){
         $content = date('Y-m-d H:i:s')." ".$log_content."\r\n";
-        if (isset($_SERVER['HTTP_APPNAME'])) {
+        if (isset($_SERVER['HTTP_APPNAME'])) { //如果是SAE
             sae_set_display_errors(false);
             sae_debug(trim($content));
             sae_set_display_errors(true);
