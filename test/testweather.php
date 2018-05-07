@@ -8,5 +8,5 @@
 
 include ("../weather.php");
 
-$result = getWeatherInfo("深圳");
+$result = getWeatherInfo("产假");
 echo $result;

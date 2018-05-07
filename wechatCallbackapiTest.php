@@ -130,11 +130,15 @@ class wechatCallbackapiTest
                 "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
                 "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
             #endregion
-        } else if (strstr($keyword, "天气")){
+        } else if (strstr($keyword, "天气")) {
             $city = str_replace('天气', '', $keyword);
             include("weather.php");
             $content = getWeatherInfo($city);
+            if (is_string($content) && strstr(strtolower($content), 'no result')) {
+                $result = $this->transmitText($object, "城市错误");
+            } else {
             $result = $this->transmitNews($object, $content);
+            }
             return $result;
         }else {
             #region 其他回复
