@@ -107,6 +107,7 @@ class wechatCallbackapiTest
         } else if (strstr($keyword, "表情")) {
             $content = "微笑：/::) \n 乒乓：/:oo \n 中国：" . $this->bytes_to_emoji(0x1F1E8) . $this->bytes_to_emoji(0x1F1F3) . "\n仙人掌：" . $this->bytes_to_emoji(0x1F335);
         } else if (strstr($keyword, "单图文")) {
+            #region 单图文
             $content = array();
             $content[] = array("Title" => "百度",
                 "Description" => "百度一下",
@@ -128,11 +129,19 @@ class wechatCallbackapiTest
                 "Description"=>"歌手：凯瑟喵",
                 "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
                 "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
-        } else {
+            #endregion
+        } else if (strstr($keyword, "天气")){
+            $city = str_replace('天气', '', $keyword);
+            include("weather.php");
+            $content = getWeatherInfo($city);
+            $result = $this->transmitNews($object, $content);
+            return $result;
+        }else {
+            #region 其他回复
             if($keyword == "时间" || $keyword == "time"){//回复时间
                 $content = date('y-m-d h:i:s',time()) . "\nOpenId:" . $object->FromUserName . "\n";
             }else if($keyword == "?" || $keyword == "？" ){
-                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 time 文本 表情 单图文 多图文 音乐 \n 请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置";
+                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 time 文本 表情 单图文 多图文 音乐 \n 请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置";                   #endregion
             } else { //回复接收的内容
                 $content = $keyword;
             }
