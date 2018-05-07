@@ -141,7 +141,7 @@ class wechatCallbackapiTest
             if($keyword == "时间" || $keyword == "time"){//回复时间
                 $content = date('y-m-d h:i:s',time()) . "\nOpenId:" . $object->FromUserName . "\n";
             }else if($keyword == "?" || $keyword == "？" ){
-                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 time 文本 表情 单图文 多图文 音乐 \n 请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置";                   #endregion
+                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 or time\n文本\n表情\n单图文\n多图文\n音乐\n天气 地点\n请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置等";                   #endregion
             } else { //回复接收的内容
                 $content = $keyword;
             }
