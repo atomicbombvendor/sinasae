@@ -15,3 +15,5 @@ build
 .idea
 .idea/*
 .idea/vcs.xml
+
+test/log\.txt
