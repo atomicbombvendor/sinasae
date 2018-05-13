@@ -102,53 +102,63 @@ class wechatCallbackapiTest
     private function receiveText($object){
         $keyword = trim($object->Content);
 
-        if (strstr($keyword, "文本")) { // strstr 查找 文本 第一次出现的位置，并返回字符串的剩余部分
-            $content = "这是个文本消息";
-        } else if (strstr($keyword, "表情")) {
-            $content = "微笑：/::) \n 乒乓：/:oo \n 中国：" . $this->bytes_to_emoji(0x1F1E8) . $this->bytes_to_emoji(0x1F1F3) . "\n仙人掌：" . $this->bytes_to_emoji(0x1F335);
-        } else if (strstr($keyword, "单图文")) {
-            #region 单图文
-            $content = array();
-            $content[] = array("Title" => "百度",
-                "Description" => "百度一下",
-                "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
-                "Url" => "www.baidu.com");
-        } else if (strstr($keyword, "图文") || strstr($keyword, "多图文")) {
-            $content = array(); //数组下面包含了别名数组，也就是 二维数组
-            $content[] = array("Title" => "百度",
-                "Description" => "百度一下", "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
-                "Url" => "www.baidu.com");
-            $content[] = array("Title" => "谷歌",
-                "Description" => "Google", "PicUrl" => "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-                "Url" => "www.google.com");
-            $content[] = array("Title" => "BING",
-                "Description" => "必应搜索", "PicUrl" => "https://img.25pp.com/uploadfile/app/icon/20161205/1480897804657521.jpg",
-                "Url" => "www.bing.com");
-        } else if (strstr($keyword, "音乐")) {
-            $content = array("Title"=>"我第一个喜欢的女孩",
-                "Description"=>"歌手：凯瑟喵",
-                "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
-                "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
-            #endregion
-        } else if (strstr($keyword, "天气")) {
-            $city = str_replace('天气', '', $keyword);
-            include("weather.php");
-            $content = getWeatherInfo($city);
-            if (is_string($content) && strstr(strtolower($content), 'no result')) {
-                $result = $this->transmitText($object, "城市错误");
-            } else {
-            $result = $this->transmitNews($object, $content);
-            }
-            return $result;
-        }else {
-            #region 其他回复
-            if($keyword == "时间" || $keyword == "time"){//回复时间
-                $content = date('y-m-d h:i:s',time()) . "\nOpenId:" . $object->FromUserName . "\n";
-            }else if($keyword == "?" || $keyword == "？" ){
-                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 or time\n文本\n表情\n单图文\n多图文\n音乐\n天气 地点\n请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置等";                   #endregion
-            } else { //回复接收的内容
-                $content = $keyword;
-            }
+        switch ($keyword) {
+            case "文本":
+                $content = "这是个文本消息";
+                break;
+            case "单图文":
+                $content = array();
+                $content[] = array("Title" => "百度",
+                    "Description" => "百度一下",
+                    "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
+                    "Url" => "www.baidu.com");
+                break;
+            case "表情":
+                $content = "微笑：/::) \n 乒乓：/:oo \n 中国：" . $this->bytes_to_emoji(0x1F1E8) . $this->bytes_to_emoji(0x1F1F3) . "\n仙人掌：" . $this->bytes_to_emoji(0x1F335);
+                break;
+            case strstr($keyword, "图文") || strstr($keyword, "多图文"):
+                $content = array(); //数组下面包含了别名数组，也就是 二维数组
+                $content[] = array("Title" => "百度",
+                    "Description" => "百度一下", "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
+                    "Url" => "www.baidu.com");
+                $content[] = array("Title" => "谷歌",
+                    "Description" => "Google", "PicUrl" => "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                    "Url" => "www.google.com");
+                $content[] = array("Title" => "BING",
+                    "Description" => "必应搜索", "PicUrl" => "https://img.25pp.com/uploadfile/app/icon/20161205/1480897804657521.jpg",
+                    "Url" => "www.bing.com");
+                break;
+            case "音乐":
+                $content = array("Title" => "我第一个喜欢的女孩",
+                    "Description" => "歌手：凯瑟喵",
+                    "MusicUrl" => "http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
+                    "HQMusicUrl" => "http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
+                break;
+            case strstr($keyword, "天气"):
+                $city = str_replace('天气', '', $keyword);
+                include("weather.php");
+                $content = getWeatherInfo($city);
+                if (is_string($content) && strstr(strtolower($content), 'no result')) {
+                    $result = $this->transmitText($object, "城市错误");
+                } else {
+                    $result = $this->transmitNews($object, $content);
+                }
+                return $result;
+            case "笑话":
+                include("getJokeInfo.php");
+                $content = getJokeInfo();
+                $result = $this->transmitText($object, $content);
+                return $result;
+            default:
+                #region 其他回复
+                if ($keyword == "时间" || $keyword == "time") {//回复时间
+                    $content = date('y-m-d h:i:s', time()) . "\nOpenId:" . $object->FromUserName . "\n";
+                } else if ($keyword == "?" || $keyword == "？") {
+                    $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 or time\n文本\n表情\n单图文\n多图文\n音乐\n天气 地点\n请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置等";                   #endregion
+                } else { //回复接收的内容
+                    $content = $keyword;
+                }
+                break;
         }
 
         if (is_array($content)) {
@@ -161,6 +171,71 @@ class wechatCallbackapiTest
             $result = $this->transmitText($object, $content);
         }
         return $result;
+
+//        if (strstr($keyword, "文本")) { // strstr 查找 文本 第一次出现的位置，并返回字符串的剩余部分
+//            $content = "这是个文本消息";
+//        } else if (strstr($keyword, "表情")) {
+//            $content = "微笑：/::) \n 乒乓：/:oo \n 中国：" . $this->bytes_to_emoji(0x1F1E8) . $this->bytes_to_emoji(0x1F1F3) . "\n仙人掌：" . $this->bytes_to_emoji(0x1F335);
+//        } else if (strstr($keyword, "单图文")) {
+//            #region 单图文
+//            $content = array();
+//            $content[] = array("Title" => "百度",
+//                "Description" => "百度一下",
+//                "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
+//                "Url" => "www.baidu.com");
+//        } else if (strstr($keyword, "图文") || strstr($keyword, "多图文")) {
+//            $content = array(); //数组下面包含了别名数组，也就是 二维数组
+//            $content[] = array("Title" => "百度",
+//                "Description" => "百度一下", "PicUrl" => "https://www.baidu.com/img/bd_logo1.png",
+//                "Url" => "www.baidu.com");
+//            $content[] = array("Title" => "谷歌",
+//                "Description" => "Google", "PicUrl" => "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+//                "Url" => "www.google.com");
+//            $content[] = array("Title" => "BING",
+//                "Description" => "必应搜索", "PicUrl" => "https://img.25pp.com/uploadfile/app/icon/20161205/1480897804657521.jpg",
+//                "Url" => "www.bing.com");
+//        } else if (strstr($keyword, "音乐")) {
+//            $content = array("Title"=>"我第一个喜欢的女孩",
+//                "Description"=>"歌手：凯瑟喵",
+//                "MusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3",
+//                "HQMusicUrl"=>"http://fs.open.kugou.com/56421207aee2f346f44cbfde4596ab49/5aeed833/G052/M09/11/08/1IYBAFa58QKAa45fACsrmd-dtis592.mp3");
+//            #endregion
+//        } else if (strstr($keyword, "天气")) {
+//            $city = str_replace('天气', '', $keyword);
+//            include("weather.php");
+//            $content = getWeatherInfo($city);
+//            if (is_string($content) && strstr(strtolower($content), 'no result')) {
+//                $result = $this->transmitText($object, "城市错误");
+//            } else {
+//            $result = $this->transmitNews($object, $content);
+//            }
+//            return $result;
+//        }else if(strstr($keyword, "笑话")){
+//            include ("getJokeInfo.php");
+//            $content = getJokeInfo();
+//            $result = $this->transmitNews($object, $content);
+//            return $result;
+//        } else {
+//            #region 其他回复
+//            if($keyword == "时间" || $keyword == "time"){//回复时间
+//                $content = date('y-m-d h:i:s',time()) . "\nOpenId:" . $object->FromUserName . "\n";
+//            }else if($keyword == "?" || $keyword == "？" ){
+//                $content = "欢迎关注读书患不多 \n请回复一下关键字：时间 or time\n文本\n表情\n单图文\n多图文\n音乐\n天气 地点\n请按住说话 或 点击 + 再分别发送一下内容：语音 图片 小视频 我的收藏 位置等";                   #endregion
+//            } else { //回复接收的内容
+//                $content = $keyword;
+//            }
+//        }
+//
+//        if (is_array($content)) {
+//            if (isset($content[0])) { //isset 检测变量是否设置
+//                $result = $this->transmitNews($object, $content);
+//            } else if (isset($content['MusicUrl'])) {
+//                $result = $this->transmitMusic($object, $content);
+//            }
+//        }else {
+//            $result = $this->transmitText($object, $content);
+//        }
+//        return $result;
     }
 
     private function receiveImage($object){

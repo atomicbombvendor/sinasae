@@ -6,7 +6,7 @@
  * Time: 16:07
  */
 
-include ("wechatCallbackapiTest.php");
+include("code/wechatCallbackapiTest.php");
 header('Content-type:text');
 define("TOKEN", "weixin");
 
