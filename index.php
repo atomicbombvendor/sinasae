@@ -5,7 +5,7 @@
  * Date: 5/5/2018
  * Time: 16:07
  */
-
+echo "adfdd";
 include("code/wechatCallbackapiTest.php");
 header('Content-type:text');
 define("TOKEN", "weixin");

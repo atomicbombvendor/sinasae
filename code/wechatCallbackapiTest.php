@@ -146,7 +146,12 @@ class wechatCallbackapiTest
                 return $result;
             case "笑话":
                 include("getJokeInfo.php");
-                $content = getJokeInfo();
+//                $content = getJokeInfo();
+                $content = "Not Ready";
+                $result = $this->transmitText($object, $content);
+                return $result; # return会跳过下面的处理流程
+            case "预约":
+                $content = "http://xiaobaili.applinzi.com/orders/order.php";
                 $result = $this->transmitText($object, $content);
                 return $result; # return会跳过下面的处理流程
             default:
