@@ -154,6 +154,10 @@ class wechatCallbackapiTest
                 $content = "http://xiaobaili.applinzi.com/orders/order.php";
                 $result = $this->transmitText($object, $content);
                 return $result; # return会跳过下面的处理流程
+            case "微站":
+                $content = "http://xiaobaili.applinzi.com/MicSite/index.html";
+                $result = $this->transmitText($object, $content);
+                return $result; # return会跳过下面的处理流程
             default:
                 #region 其他回复
                 if ($keyword == "时间" || $keyword == "time") {//回复时间
