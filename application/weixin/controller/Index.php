@@ -7,19 +7,28 @@
  */
 
 namespace app\weixin\controller;
-include("messageWeixin.php");
-use think\Controller;
-use think\Db;
 
+use think\Controller;
 define("TOKEN_WEIXIN", "weixin");
 
-class Index extends Controller{
+class Index extends Controller
+{
     public function index(){
-        if(!isset($_GET["echostr"])){
+        if (!isset($_GET['echostr'])) {
             $this->responseMsg();
         }else{
             $this->valid();
         }
+    }
+
+    public function index2($name = 'World')
+    {
+        return 'Hello,' . $name . '！';
+    }
+
+    public function index3()
+    {
+        return 'Hello,' . '！';
     }
 
     public function valid(){
@@ -42,7 +51,7 @@ class Index extends Controller{
     private function responseMsg()
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        responseMsg($postStr);
+        responseMsg_param($postStr);
     }
 
 }

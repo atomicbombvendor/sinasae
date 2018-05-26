@@ -1,20 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: eli9
- * Date: 5/5/2018
- * Time: 16:07
- */
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
 
-include("code/wechatCallbackapi.php");
-header('Content-type:text');
-define("TOKEN", "weixin");
+// [ 应用入口文件 ]
 
-$wechatObj = new wechatCallbackapi();
-if(isset($_GET['echostr'])){
-    $wechatObj->valid();
-}else{
-    $wechatObj->responseMsg();
-}
-
-?>
+// 定义应用目录
+define('APP_PATH', __DIR__ . '/application/');
+// 加载框架引导文件
+require __DIR__ . '/thinkphp/start.php';

@@ -6,7 +6,7 @@
  * Time: 18:55
  */
 
-function responseMsg($postStr){
+function responseMsg_param2($postStr){
 
     if(!empty($postStr)){
         $this->logger("Receive \r\n".$postStr);
