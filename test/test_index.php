@@ -5,7 +5,7 @@
  * Date: 5/6/2018
  * Time: 18:11
  */
-include("../code/wechatCallbackapiTest.php");
+include("../code/wechatCallbackapi.php");
 
 header('Content-type:text');
 define("TOKEN", "weixin");
@@ -19,7 +19,7 @@ $GLOBALS["HTTP_RAW_POST_DATA"] = "<xml>
     <MsgId>1234567890abcdef</MsgId>
 </xml>";
 
-$wechatObj = new wechatCallbackapiTest();
+$wechatObj = new wechatCallbackapi();
 if(isset($_GET['echostr'])){
     $wechatObj->valid();
 }else{

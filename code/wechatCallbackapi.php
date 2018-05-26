@@ -6,7 +6,7 @@
  * Time: 18:16
  */
 
-class wechatCallbackapiTest
+class wechatCallbackapi
 {
     public function valid(){
         $echostr = $_GET["echostr"];
