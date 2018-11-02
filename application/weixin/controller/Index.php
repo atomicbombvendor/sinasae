@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: eli9
+ * User: atomic
  * Date: 5/26/2018
  * Time: 18:48
  */
@@ -14,11 +14,12 @@ define("TOKEN_WEIXIN", "weixin");
 class Index extends Controller
 {
     public function index(){
-        if (!isset($_GET['echostr'])) {
-            $this->responseMsg();
-        }else{
-            $this->valid();
-        }
+//        if (!isset($_GET['echostr'])) {
+//            $this->responseMsg();
+//        }else{
+//            $this->valid();
+//        }
+        return $this->fetch();
     }
 
     public function index2($name = 'World')
